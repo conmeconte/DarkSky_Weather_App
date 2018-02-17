@@ -1,5 +1,6 @@
 import axios from 'axios';
 import types from './types'; 
+import keys from '../keys';
 
 
 export function fetchWeather(city="37.8267,-122.4233"){
