@@ -4,6 +4,9 @@
   "proxy": {
     "/api/weather": {
       "target": "http://localhost:9000"
+    },
+    "/api/*": {
+      "target": "http://localhost:9000"
     }
   },
   "description": "Weather Application",
@@ -22,12 +25,15 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
+    "bootstrap": "^4.0.0",
+    "bootstrap-css": "^4.0.0-alpha.5",
     "lodash": "^4.17.5",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "react-sparklines": "^1.7.0",
     "redux": "^3.7.2",
+    "redux-form": "^7.2.3",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0"
   },

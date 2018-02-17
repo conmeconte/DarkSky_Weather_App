@@ -3,22 +3,21 @@ import types from './types';
 import keys from '../keys';
 
 
-export function fetchWeather(city="37.8267,-122.4233"){
-    // city should be 'x,y'
-    return (dispatch)=>{
-        const request = axios.get('/api/weather').then((resp)=>{
-            console.log(' data obj ', resp);
+export function fetchWeather(address){
+    return (dispatch) => {
+        const request = axios.post('/api/weather', address).then((resp)=>{
 
             dispatch({
                 type: types.FETCH_WEATHER,
                 payload: resp.data
             });
 
-        }).catch(err=>{
+        }).catch( err => {
             dispatch({
                 type: types.AXIOS_ERROR,
                 msg: " Failed axios call "
             });
         });
     }
+
 }

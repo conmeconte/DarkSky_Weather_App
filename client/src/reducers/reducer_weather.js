@@ -1,15 +1,17 @@
 import types from '../actions/types';
 
-export default function(state=[], action){
-    console.log("reducer state :", state); 
+export default function(state={}, action){
+    // console.log("reducer state :", state); 
 
     switch (action.type){
         case types.FETCH_WEATHER:
-            return [action.payload.data, ...state]; 
+            console.log("reducer action ", action.payload)
+            return [action.payload, ...state]; 
         case types.AXIOS_ERROR:
-            console.log(action.payload); 
+            console.log("reducer error ", action.payload); 
         default: 
             return state; 
     }
+    console.log("state is ", state); 
 
 }

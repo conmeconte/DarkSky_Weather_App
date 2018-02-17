@@ -1,16 +1,17 @@
 
 
 module.exports = (app, darksky)=>{
-    console.log('arrived at backend');
 
-    app.get('/api/weather', (req, res)=>{
+    app.post('/api/weather', (req, res)=>{
+        console.log('api time', req.body.date); 
         darksky
         .options({
-            latitude: 37.8267,
-            longitude: -122.423,
-            time: '2017-08-10',
+            latitude: req.body.lnglat.lat,
+            longitude: req.body.lnglat.lng,
+            time: req.body.date,
             language: 'en',
-            exclude: ['minutely', 'daily'],
+            // exclude: ['minutely', 'daily'],
+            exclude: ['minutely'],
             extendHourly: true
         })
         .get()
