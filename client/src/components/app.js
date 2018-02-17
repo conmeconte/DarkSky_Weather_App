@@ -1,14 +1,14 @@
-import React from 'react';
-import '../assets/css/app.css';
-import logo from '../assets/images/logo.svg';
+import React, { Component } from 'react';
+import SearchBar from './search_bar'; 
 
-const App = () => (
-    <div>
-        <div className="app">
-            <img src={logo} className="logo rotate"/>
-            <h1>Welcome to React</h1>
-        </div>
-    </div>
-);
+class App extends Component{
+    render(){
+        return(
+            <div className="container">
+                <SearchBar />
+            </div>
+        )
+    }
+}
 
 export default App;

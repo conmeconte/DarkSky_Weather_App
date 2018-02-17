@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/conmeconte/DarkSky_Weather_App#readme",
   "dependencies": {
+    "dark-sky": "^1.1.2",
     "express": "^4.16.2"
   },
   "devDependencies": {

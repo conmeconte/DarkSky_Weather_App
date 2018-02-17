@@ -1,14 +1,23 @@
-import KEYS from '../keys';
 import axios from 'axios';
+import types from './types'; 
 
 
-
-export const fetchWeather = (city="37.8267,-122.4233") => async dispatch=> {
+export function fetchWeather(city="37.8267,-122.4233"){
     // city should be 'x,y'
-    const url = `${KEYS.WEATHER_URL}/${KEYS.API_KEY}/${city}`;
-    const request = await axios.get(url); 
-    dispatch({
-        type: FETCH_WEATHER,
-        payload: request
-    })
-};
+    return (dispatch)=>{
+        const request = axios.get('/api/weather').then((resp)=>{
+            console.log(' data obj ', resp);
+
+            dispatch({
+                type: types.FETCH_WEATHER,
+                payload: resp.data
+            });
+
+        }).catch(err=>{
+            dispatch({
+                type: types.AXIOS_ERROR,
+                msg: " Failed axios call "
+            });
+        });
+    }
+}

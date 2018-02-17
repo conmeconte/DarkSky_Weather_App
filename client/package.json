@@ -1,6 +1,11 @@
 {
   "name": "DarkSky_Weather_App",
   "version": "1.0.0",
+  "proxy": {
+    "/api/weather": {
+      "target": "http://localhost:9000"
+    }
+  },
   "description": "Weather Application",
   "main": "index.js",
   "scripts": {
