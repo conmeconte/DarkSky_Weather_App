@@ -20,7 +20,7 @@ class WeatherList extends Component{
         const {longitude, latitude} = cityData;
         const defaults = {
             icon: 'CLEAR_DAY',
-            // color: 'black',
+            color: 'white',
             // size: 150,
             animate: true
           };
