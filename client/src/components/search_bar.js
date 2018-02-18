@@ -2,51 +2,116 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators } from 'redux';
 import { fetchWeather } from '../actions';
+import { Field, reduxForm } from 'redux-form'; 
+import keys from '../keys';
+import axios from 'axios'; 
+import './search_bar.css'; 
+
+
 
 class SearchBar extends Component {
-    constructor(props){
-        super(props);
 
-        this.state = {
-            term: ''
-        };
-        this.onInputChange= this.onInputChange.bind(this); 
-        this.onFormSubmit=this.onFormSubmit.bind(this); 
+    renderField(field){
+        const { meta: { touched , error } } = field; 
+        const className= `form-group ${touched && error ? 'has-danger' : ''}`
+
+        //field.meta.error gives access to the returned error obj from validate function
+        return(
+            <div className={className}>
+                <label>{field.label}</label>
+                <input className="form-control" type={field.type ? field.type : 'text'} {...field.input}/>
+                <div className="warningNotice">{touched ? error: <br/>}</div>
+            </div>
+        )
     }
 
-    onInputChange(event){
+ 
+
+    onFormSubmit(addresses){
+        let address2=''
+        let lnglat= '';
+        const sendingData={}
+        // let oneWeekAgo= new Date();
+        // oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
+        // oneWeekAgo.toLocaleDateString()
+        // console.log("one wee ago", oneWeekAgo); 
+
+        for(let input in addresses){
+            if(input === 'address'){
+                address2+=addresses[input]+','; 
+            }else if(input === 'date'){
+                sendingData[input]= addresses[input]; 
+            }
+            else{
+                address2+='+'+ addresses[input] + ','; 
+            }
+        }
+        const editAddress= address2.replace(/\s/g, '+');
+        const URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${editAddress}&key=${keys.GEO_API_KEY}`
         
-        this.setState({ term: event.target.value});
-    
-    }
-
-    onFormSubmit(event){
-        event.preventDefault();
-        this.props.fetchWeather(this.state.term); 
-        this.setState({term: ''});
-        //We need to go and fetch weather data; 
+        this.props.reset(); 
+        axios.get(URL).then((data)=>{
+            console.log('data is ', data)
+            lnglat= data.data.results[0].geometry.location;
+            sendingData["lnglat"]= lnglat
+            this.props.fetchWeather(sendingData); 
+        });
     }
 
     render(){
         return (
-            <form onSubmit={this.onFormSubmit} className="input-group">
-                <input
-                    placeholder='Get a five-day forecast in you favorite cities'
-                    className='form-control'
-                    value={this.state.term}
-                    onChange={this.onInputChange}
-                />
-                <span className='input-group-btn'>
-                    <button type='submit' className='btn btn-secondary'>Submit</button>
-                </span>
-            </form>
+            <div className="form_container">
+                <div className="video">
+                    <iframe src="https://www.youtube.com/embed/iGpuQ0ioPrM?controls=0&showinfo=0&playlist=iGpuQ0ioPrM&autoplay=1&loop=1" frameBorder="0" allowFullScreen></iframe>
+                </div>
+                <form onSubmit={this.props.handleSubmit(this.onFormSubmit.bind(this))}>
+                    <h1 className="text-center pt-3">Search Weather Information</h1>
+                    <br/>
+                    <div className="row justify-content-center">
+                        <div className="col-6">
+                            <Field name="address" component={this.renderField} label="Street Address" />
+                            <Field name="city" component={this.renderField} label="City"/>
+                            <Field name="state" component={this.renderField} label="State"/>
+                            <Field type="date" name="date" component={this.renderField} label="Select Date"/>
+                            <div className="row justify-content-end">
+                                <button className="btn btn-outline-success mr-3" type="submit">Search</button>
+                                <button onClick={this.props.reset} type="button" className = "btn btn-outline-danger mr-3">Refresh</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
         )
     }
 }
+function validate(values){
+    const errors={};
+    // if (!values.address){
+    //     errors.address= "Please enter the address"; 
+    // }
+    if (!values.city){
+        errors.city= "Please enter the City"; 
+    }
+    if (!values.state){
+        errors.state= "Please enter the State"; 
+    }
+    if (!values.date){
+        errors.date= "Please enter a valid Date"; 
+    }
+
+    return errors; 
+}
+
 
 function mapDispatchToProps(dispatch){
     return bindActionCreators({ fetchWeather }, dispatch);
 
 }
 
-export default connect(null, mapDispatchToProps)(SearchBar); 
+export default reduxForm({
+    validate,
+    form: 'Search Weather'
+})(
+    connect(null, { fetchWeather })(SearchBar)
+); 

@@ -1,0 +1,25 @@
+.warningNotice{
+    height: 24px !important; 
+    color: white; 
+}
+.form_container{
+    position: relative;
+}
+label{
+    color: white !important;
+}
+
+.video,
+iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 101%;
+  pointer-events: none;
+}
+
+.form_container h1{
+    position:relative; 
+    color: white;
+}
