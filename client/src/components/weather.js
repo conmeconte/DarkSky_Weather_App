@@ -5,6 +5,7 @@ import GoogleMap from './google_map';
 import './weather.css'; 
 import Skycons from 'react-skycons';
 import ReactAnimatedWeather from 'react-animated-weather';
+import _ from 'lodash';
 
 
 
@@ -12,7 +13,7 @@ import ReactAnimatedWeather from 'react-animated-weather';
 
 class WeatherList extends Component{
     renderWeather(cityData, key){
-        // const name = cityData.city.name;
+        console.log('reached rednerweather', cityData); 
         const temps = cityData.hourly.data.map(weather=>weather.temperature);
         const pressure = cityData.hourly.data.map(weather => weather.pressure);
         const humidity = cityData.hourly.data.map(weather => weather.humidity);
@@ -25,9 +26,11 @@ class WeatherList extends Component{
           };
 
 
-        if(cityData.currently.summary){
             switch(cityData.currently.summary){
                 case "Partly Cloudy":
+                    defaults.icon= "PARTLY_CLOUDY_DAY"
+                    break;
+                case "Mostly Cloudy":
                     defaults.icon= "PARTLY_CLOUDY_DAY"
                     break;
                 case "Clear":
@@ -48,17 +51,20 @@ class WeatherList extends Component{
                 case "Wind":
                     defaults.icon= "WIND"
                     break;
+                case "Windy":
+                    defaults.icon= "WIND"
+                    break;
                 case "Fog":
                     defaults.icon= "FOG"
                     break;
                 default: null;
             }
-        }
 
         return(
             <tr key={key}>
                 {/* <td><GoogleMap lon={longitude} lat={latitude} /></td> */}
-                <td><GoogleMap lon={this.props.weather[0].longitude} lat={this.props.weather[0].latitude} /></td>
+                <td><GoogleMap lon={this.props.weather.longitude} lat={this.props.weather.latitude} /></td>
+                {/* <td><GoogleMap  /></td> */}
                 <td>
                     {cityData.currently.summary}
                     <ReactAnimatedWeather
@@ -76,7 +82,7 @@ class WeatherList extends Component{
     }
 
     render(){
-
+        console.log("changed this.props.weather", this.props.weather)
 
         return(
             <table className="table table-hover">
@@ -90,8 +96,7 @@ class WeatherList extends Component{
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {this.props.weather ? this.props.weather[0].hourly.data.map(this.renderWeather) : null} */}
-                    {this.props.weather[0] ? this.renderWeather(this.props.weather[0]) : null}
+                    {_.isEmpty(this.props.weather) ? null: this.renderWeather(this.props.weather) }
                 </tbody>
 
             </table>
@@ -99,11 +104,9 @@ class WeatherList extends Component{
     }
 }
 
-function mapStateToProps({weather, form}){
+function mapStateToProps({weather}){
 
-    return {weather, form}
+    return (weather)
 }
-// function mapStateToProps(state){
-//     return {weather: state.weather}
-// }
+
 export default connect(mapStateToProps)(WeatherList); 
