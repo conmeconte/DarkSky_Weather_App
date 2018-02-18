@@ -15,7 +15,8 @@ export function fetchWeather(address){
         }).catch( err => {
             dispatch({
                 type: types.AXIOS_ERROR,
-                msg: " Failed axios call "
+                msg: " Failed axios call ",
+                payload: err
             });
         });
     }

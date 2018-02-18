@@ -14,7 +14,6 @@ class SearchBar extends Component {
     renderField(field){
         const { meta: { touched , error } } = field; 
         const className= `form-group ${touched && error ? 'has-danger' : ''}`
-
         //field.meta.error gives access to the returned error obj from validate function
         return(
             <div className={className}>
@@ -31,10 +30,9 @@ class SearchBar extends Component {
         let address2=''
         let lnglat= '';
         const sendingData={}
-        // let oneWeekAgo= new Date();
-        // oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
-        // oneWeekAgo.toLocaleDateString()
-        // console.log("one wee ago", oneWeekAgo); 
+        // var oneWeek = new Date();
+        // oneWeek.setTime(oneWeek.valueOf() - 7 * 24 * 60 * 60 * 1000);
+        // oneWeek.toLocaleString()
 
         for(let input in addresses){
             if(input === 'address'){
@@ -51,7 +49,6 @@ class SearchBar extends Component {
         
         this.props.reset(); 
         axios.get(URL).then((data)=>{
-            console.log('data is ', data)
             lnglat= data.data.results[0].geometry.location;
             sendingData["lnglat"]= lnglat
             this.props.fetchWeather(sendingData); 
@@ -72,7 +69,7 @@ class SearchBar extends Component {
                             <Field name="address" component={this.renderField} label="Street Address" />
                             <Field name="city" component={this.renderField} label="City"/>
                             <Field name="state" component={this.renderField} label="State"/>
-                            <Field type="date" name="date" component={this.renderField} label="Select Date"/>
+                            <Field id="dateSelector" type="date" name="date" component={this.renderField} label="Select Date"/>
                             <div className="row justify-content-end">
                                 <button className="btn btn-outline-success mr-3" type="submit">Search</button>
                                 <button onClick={this.props.reset} type="button" className = "btn btn-outline-danger mr-3">Refresh</button>
@@ -104,14 +101,21 @@ function validate(values){
 }
 
 
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({ fetchWeather }, dispatch);
+// function mapDispatchToProps(dispatch){
+//     return bindActionCreators({ fetchWeather }, dispatch);
 
-}
+// }
 
-export default reduxForm({
+SearchBar=reduxForm({
     validate,
     form: 'Search Weather'
-})(
-    connect(null, { fetchWeather })(SearchBar)
-); 
+})(SearchBar);
+export default connect(null, {fetchWeather})(SearchBar);
+
+
+// export default reduxForm({
+//     validate,
+//     form: 'Search Weather'
+// })(
+//     connect(null, { fetchWeather })(SearchBar)
+// ); 
