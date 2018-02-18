@@ -5,6 +5,7 @@ import { fetchWeather } from '../actions';
 import { Field, reduxForm } from 'redux-form'; 
 import keys from '../keys';
 import axios from 'axios'; 
+import './search_bar.css'; 
 
 
 
@@ -19,7 +20,7 @@ class SearchBar extends Component {
             <div className={className}>
                 <label>{field.label}</label>
                 <input className="form-control" type={field.type ? field.type : 'text'} {...field.input}/>
-                <div className="text-danger">{touched ? error: <br/>}</div>
+                <div className="warningNotice">{touched ? error: <br/>}</div>
             </div>
         )
     }
@@ -30,6 +31,11 @@ class SearchBar extends Component {
         let address2=''
         let lnglat= '';
         const sendingData={}
+        // let oneWeekAgo= new Date();
+        // oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
+        // oneWeekAgo.toLocaleDateString()
+        // console.log("one wee ago", oneWeekAgo); 
+
         for(let input in addresses){
             if(input === 'address'){
                 address2+=addresses[input]+','; 
@@ -45,6 +51,7 @@ class SearchBar extends Component {
         
         this.props.reset(); 
         axios.get(URL).then((data)=>{
+            console.log('data is ', data)
             lnglat= data.data.results[0].geometry.location;
             sendingData["lnglat"]= lnglat
             this.props.fetchWeather(sendingData); 
@@ -53,31 +60,36 @@ class SearchBar extends Component {
 
     render(){
         return (
-            <form onSubmit={this.props.handleSubmit(this.onFormSubmit.bind(this))}>
-                <h1 className="text-center">Search Weather Information</h1>
-                <br/>
-                <div className="row justify-content-center">
-                    <div className="col-6">
-                        <Field name="address" component={this.renderField} label="Street Address" />
-                        <Field name="city" component={this.renderField} label="City"/>
-                        <Field name="state" component={this.renderField} label="State"/>
-                        <Field type="date" name="date" component={this.renderField} label="Select Date"/>
-                        <div className="row justify-content-end">
-                            <button className="btn btn-outline-success mr-3" type="submit">Search</button>
-                            <button onClick={this.props.reset} type="button" className = "btn btn-outline-danger mr-3">Refresh</button>
+            <div className="form_container">
+                <div className="video">
+                    <iframe src="https://www.youtube.com/embed/iGpuQ0ioPrM?controls=0&showinfo=0&playlist=iGpuQ0ioPrM&autoplay=1&loop=1" frameBorder="0" allowFullScreen></iframe>
+                </div>
+                <form onSubmit={this.props.handleSubmit(this.onFormSubmit.bind(this))}>
+                    <h1 className="text-center pt-3">Search Weather Information</h1>
+                    <br/>
+                    <div className="row justify-content-center">
+                        <div className="col-6">
+                            <Field name="address" component={this.renderField} label="Street Address" />
+                            <Field name="city" component={this.renderField} label="City"/>
+                            <Field name="state" component={this.renderField} label="State"/>
+                            <Field type="date" name="date" component={this.renderField} label="Select Date"/>
+                            <div className="row justify-content-end">
+                                <button className="btn btn-outline-success mr-3" type="submit">Search</button>
+                                <button onClick={this.props.reset} type="button" className = "btn btn-outline-danger mr-3">Refresh</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-            </form>
+                </form>
+            </div>
+            
         )
     }
 }
 function validate(values){
     const errors={};
-    if (!values.address){
-        errors.address= "Please enter the address"; 
-    }
+    // if (!values.address){
+    //     errors.address= "Please enter the address"; 
+    // }
     if (!values.city){
         errors.city= "Please enter the City"; 
     }

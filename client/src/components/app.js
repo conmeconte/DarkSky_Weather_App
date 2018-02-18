@@ -10,6 +10,7 @@ class App extends Component{
         return(
             <div className="container">
                 <SearchBar />
+                <br/>
                 <Weather />
             </div>
         )
