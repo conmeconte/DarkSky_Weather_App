@@ -65,7 +65,7 @@ class SearchBar extends Component {
                     <h1 className="text-center pt-3">Search Weather Information</h1>
                     <br/>
                     <div className="row justify-content-center">
-                        <div className="col-6">
+                        <div className="col-6 col-sm-10">
                             <Field name="address" component={this.renderField} label="Street Address" />
                             <Field name="city" component={this.renderField} label="City"/>
                             <Field name="state" component={this.renderField} label="State"/>
