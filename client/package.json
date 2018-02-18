@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "proxy": {
     "/api/weather": {
-      "target": "http://localhost:9000"
+      "target": "http://localhost:8080"
     },
     "/api/*": {
-      "target": "http://localhost:9000"
+      "target": "http://localhost:8080"
     }
   },
   "description": "Weather Application",

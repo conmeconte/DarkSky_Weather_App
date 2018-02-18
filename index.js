@@ -5,7 +5,7 @@ const DarkSky = require('dark-sky')
 const darksky = new DarkSky(keys.API_KEY); 
 
 const app   = express();
-const PORT  = process.env.PORT || 9000;
+const PORT  = process.env.PORT || 8080;
 
 
 app.use(express.json());
