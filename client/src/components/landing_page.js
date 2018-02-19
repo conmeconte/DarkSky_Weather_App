@@ -6,7 +6,7 @@ export default ()=>{
     return(
         <div className="landing justify-content-center">
             <div className="video">
-                <iframe src="https://www.youtube.com/embed/iGpuQ0ioPrM?controls=0&showinfo=0&playlist=iGpuQ0ioPrM&autoplay=1&loop=1" frameBorder="0" allowFullScreen></iframe>   
+                <iframe src={/Mobi/.test(navigator.userAgent) ? null : "https://www.youtube.com/embed/iGpuQ0ioPrM?controls=0&showinfo=0&playlist=iGpuQ0ioPrM&autoplay=1&loop=1"} frameBorder="0"></iframe>   
             </div>
             <div className="landing_content">
                 <div className="row justify-content-center">
