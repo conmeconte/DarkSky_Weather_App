@@ -6,7 +6,10 @@
 .landing_content{
     color: white; 
     position:relative; 
-    padding-top: 20%; 
+    padding-top: 10%; 
+}
+.landing_bottons{
+    padding-bottom: 10%; 
 }
 .mobile{
     display:none; 
