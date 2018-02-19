@@ -10,7 +10,7 @@ export default ()=>{
             </div>
             <div className="landing_content">
                 <div className="row justify-content-center">
-                    <h1 className="text-center">WELCOME TO YOUR WEATHER SEARCH ENGINE</h1>
+                    <h1 className="text-center px-5">WELCOME TO YOUR WEATHER SEARCH ENGINE</h1>
                     <p className="px-5 my-5 text-center">This Application Allows You to Select a Location Within United States. Once Loction is Selected it Will Show You the Weather Condition of the Selected  Location on the Past Week or of a Date Depending on Your Selection</p>
 
                 </div>
