@@ -1,3 +1,8 @@
+.table-hover{
+    color: white !important; 
+    display: table !important; 
+}
+
 td, th{
     vertical-align: middle !important;
     text-align: center !important;
@@ -21,3 +26,10 @@ canvas {
     margin-left: 8px;
     margin-top: 8px;
   }
+
+  @media (max-width: 768px) { 
+    .table-hover{
+        color: white !important; 
+        display: block !important; 
+    }
+   }

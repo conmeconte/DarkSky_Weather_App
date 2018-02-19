@@ -21,7 +21,9 @@
   "homepage": "https://github.com/conmeconte/DarkSky_Weather_App#readme",
   "dependencies": {
     "dark-sky": "^1.1.2",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "file-system": "^2.2.2",
+    "moment": "^2.20.1"
   },
   "devDependencies": {
     "concurrently": "^3.5.1",

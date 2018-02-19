@@ -1,4 +1,4 @@
-
+var moment = require('moment');
 
 module.exports = (app, darksky)=>{
 
@@ -8,7 +8,7 @@ module.exports = (app, darksky)=>{
         .options({
             latitude: req.body.lnglat.lat,
             longitude: req.body.lnglat.lng,
-            time: req.body.date,
+            time: req.body.date || moment().subtract(1, 'weeks'),
             language: 'en',
             // exclude: ['minutely', 'daily'],
             exclude: ['minutely'],
@@ -22,4 +22,5 @@ module.exports = (app, darksky)=>{
             res.send(err); 
         })
     })
+
 }

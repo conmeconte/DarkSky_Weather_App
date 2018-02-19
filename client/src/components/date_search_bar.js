@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators } from 'redux';
-import { fetchWeather } from '../actions';
+import { fetchWeatherByDate } from '../actions';
 import { Field, reduxForm } from 'redux-form'; 
 import keys from '../keys';
 import axios from 'axios'; 
 import './search_bar.css'; 
 import { Link } from 'react-router-dom';
+import './date_search_bar.css'
 
 
 
-class SearchBar extends Component {
+class DateSearchBar extends Component {
 
     renderField(field){
         const { meta: { touched , error } } = field; 
         const className= `form-group ${touched && error ? 'has-danger' : ''}`
-        //field.meta.error gives access to the returned error obj from validate function
         return(
             <div className={className}>
                 <label>{field.label}</label>
@@ -31,9 +31,7 @@ class SearchBar extends Component {
         let address2=''
         let lnglat= '';
         const sendingData={}
-        // var oneWeek = new Date();
-        // oneWeek.setTime(oneWeek.valueOf() - 7 * 24 * 60 * 60 * 1000);
-        // oneWeek.toLocaleString()
+
 
         for(let input in addresses){
             if(input === 'address'){
@@ -53,7 +51,7 @@ class SearchBar extends Component {
         axios.get(URL).then((data)=>{
             lnglat= data.data.results[0].geometry.location;
             sendingData["lnglat"]= lnglat
-            this.props.fetchWeather(sendingData); 
+            this.props.fetchWeatherByDate(sendingData); 
         });
     }
 
@@ -64,17 +62,17 @@ class SearchBar extends Component {
                     <iframe src={/Mobi/.test(navigator.userAgent) ? null : "https://www.youtube.com/embed/iGpuQ0ioPrM?controls=0&showinfo=0&playlist=iGpuQ0ioPrM&autoplay=1&loop=1"} frameBorder="0"></iframe>   
                 </div>
                 <form onSubmit={this.props.handleSubmit(this.onFormSubmit.bind(this))}>
-                    <h1 className="text-center pt-3">Last Week's Weather Information</h1>
+                    <h1 className="text-center pt-3">Choose the Location and Date</h1>
                     <br/>
                     <div className="row justify-content-center">
                         <div className="col-10 col-md-6">
                             <Field name="address" component={this.renderField} label="Street Address" />
                             <Field name="city" component={this.renderField} label="City"/>
                             <Field name="state" component={this.renderField} label="State"/>
-                            {/* <Field id="dateSelector" type="date" name="date" component={this.renderField} label="Select Date"/> */}
+                            <Field id="dateSelector" type="date" name="date" component={this.renderField} label="Select Date"/>
                             <div className="row justify-content-end">
                                 <button className="btn btn-outline-success mr-3" type="submit">Search</button>
-                                <button onClick={this.props.reset} type="button" className = "btn btn-outline-danger mr-3">Refresh</button>
+                                <button onClick={this.props.reset} type="button" className = "mr-3 btn btn-outline-danger">Refresh</button>
                                 <Link className="btn btn-outline-info mr-3" to="/">Back to Main</Link>
                             </div>
                         </div>
@@ -87,38 +85,24 @@ class SearchBar extends Component {
 }
 function validate(values){
     const errors={};
-    // if (!values.address){
-    //     errors.address= "Please enter the address"; 
-    // }
+
     if (!values.city){
         errors.city= "Please enter the City"; 
     }
     if (!values.state){
         errors.state= "Please enter the State"; 
     }
-    // if (!values.date){
-    //     errors.date= "Please enter a valid Date"; 
-    // }
+    if (!values.date){
+        errors.date= "Please enter a valid Date"; 
+    }
 
     return errors; 
 }
 
 
-// function mapDispatchToProps(dispatch){
-//     return bindActionCreators({ fetchWeather }, dispatch);
 
-// }
-
-SearchBar=reduxForm({
+DateSearchBar=reduxForm({
     validate,
-    form: 'Search Weather'
-})(SearchBar);
-export default connect(null, {fetchWeather})(SearchBar);
-
-
-// export default reduxForm({
-//     validate,
-//     form: 'Search Weather'
-// })(
-//     connect(null, { fetchWeather })(SearchBar)
-// ); 
+    form: 'Search Weather by Date'
+})(DateSearchBar);
+export default connect(null, {fetchWeatherByDate})(DateSearchBar);
