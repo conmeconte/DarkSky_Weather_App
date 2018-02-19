@@ -8,13 +8,16 @@
     position:relative; 
     padding-top: 20%; 
 }
-/* .landing_content{
-    color: white; 
-    position: absolute;
-    top: 50%;
-    height: 100px;
-    margin-top: -50px;
-    transform: translateX(-50%);
-    left: 50%;
-    width: 100%;
-} */
+.mobile{
+    display:none; 
+}
+
+@media (max-width: 768px) { 
+    .mobile{
+        display: inline-block;
+    }
+
+    .btn-group{
+        display: none; 
+    }
+}

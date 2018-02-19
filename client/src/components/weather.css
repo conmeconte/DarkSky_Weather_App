@@ -27,9 +27,9 @@ canvas {
     margin-top: 8px;
   }
 
-  @media (max-width: 768px) { 
+@media (max-width: 768px) { 
     .table-hover{
         color: white !important; 
         display: block !important; 
     }
-   }
+}
