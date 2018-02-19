@@ -14,7 +14,7 @@ export default ()=>{
                     <p className="px-5 my-5 text-center">This Application Allows You to Select a Location Within the United States. Once the Location is Selected, it Will Show You the Detailed Weather Condition of the Selected  Location on the Past Week or of a Specific Date Depending on Your Selection</p>
 
                 </div>
-                <div className="row justify-content-center">
+                <div className="row justify-content-center landing_bottons">
                     <div className="btn-group">
                         <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">Start your Search</button>
                         <div className="dropdown-menu">
