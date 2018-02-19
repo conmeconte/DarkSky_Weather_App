@@ -8,7 +8,7 @@ module.exports = (app, darksky)=>{
         .options({
             latitude: req.body.lnglat.lat,
             longitude: req.body.lnglat.lng,
-            time: req.body.date || null,
+            time: req.body.date || moment().subtract(1, 'weeks'),
             language: 'en',
             // exclude: ['minutely', 'daily'],
             exclude: ['minutely'],
@@ -23,22 +23,4 @@ module.exports = (app, darksky)=>{
         })
     })
 
-    app.post('/api/weather/weekago', (req, res)=>{
-        darksky
-        .options({
-            latitude: req.body.lnglat.lat,
-            longitude: req.body.lnglat.lng,
-            time: moment().subtract(1, 'weeks'),
-            language: 'en',
-            exclude: ['minutely'],
-            extendHourly: true
-        })
-        .get()
-        .then(value=>{
-            res.send(value); 
-        })
-        .catch(err=>{
-            res.send(err); 
-        })
-    })
 }

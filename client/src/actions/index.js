@@ -5,7 +5,7 @@ import keys from '../keys';
 
 export function fetchWeather(address){
     return (dispatch) => {
-        const request = axios.post('/api/weather/weekago', address).then((resp)=>{
+        const request = axios.post('/api/weather', address).then((resp)=>{
 
             dispatch({
                 type: types.FETCH_WEATHER,

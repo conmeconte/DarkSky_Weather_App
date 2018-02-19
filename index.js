@@ -3,6 +3,7 @@ const keys          = require('./config/keys');
 const path          = require('path');
 const DarkSky = require('dark-sky')
 const darksky = new DarkSky(keys.API_KEY); 
+const { logError, errorHandler, clientErrorHandler } = require('./middlewares/handleError'); 
 
 const app   = express();
 const PORT  = process.env.PORT || 8000;
@@ -17,6 +18,10 @@ require('./routes/apiRoutes')(app, darksky);
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
+
+app.use(logError);
+app.use(errorHandler);
+app.use(clientErrorHandler);
 
 
 app.listen(PORT, ()=>{

@@ -62,7 +62,7 @@ class DateSearchBar extends Component {
                     <iframe src={/Mobi/.test(navigator.userAgent) ? null : "https://www.youtube.com/embed/iGpuQ0ioPrM?controls=0&showinfo=0&playlist=iGpuQ0ioPrM&autoplay=1&loop=1"} frameBorder="0"></iframe>   
                 </div>
                 <form onSubmit={this.props.handleSubmit(this.onFormSubmit.bind(this))}>
-                    <h1 className="text-center pt-3">Last Week's Weather Information</h1>
+                    <h1 className="text-center pt-3">Choose the Location and Date</h1>
                     <br/>
                     <div className="row justify-content-center">
                         <div className="col-10 col-md-6">

@@ -22,11 +22,13 @@ class GoogleMap extends Component{
     componentWillReceiveProps(nextProps){
         console.log('will recieve', this.props)
         new google.maps.Map(this.refs.map, {
-            zoom: 6,
+            zoom: 8,
+            disableDefaultUI: true,
             center: {
                 lat: nextProps.lat,
                 lng: nextProps.lon
-            }
+            },
+            styles
         })
     }
     

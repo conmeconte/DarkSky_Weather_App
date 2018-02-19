@@ -85,7 +85,7 @@ class WeatherList extends Component{
         console.log("changed this.props.weather", this.props.weather)
 
         return(
-            <table className="table table-hover">
+            <table className="table table-hover table-responsive">
                 <thead>
                     <tr>
                         <th>City</th>
