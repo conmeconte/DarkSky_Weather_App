@@ -70,7 +70,7 @@ class DateSearchBar extends Component {
                             <Field name="city" component={this.renderField} label="City"/>
                             <Field name="state" component={this.renderField} label="State"/>
                             <Field id="dateSelector" type="date" name="date" component={this.renderField} label="Select Date"/>
-                            <div className="row justify-content-end">
+                            <div className="row justify-content-end my-5">
                                 <button className="btn btn-outline-success mr-3" type="submit">Search</button>
                                 <button onClick={this.props.reset} type="button" className = "mr-3 btn btn-outline-danger">Refresh</button>
                                 <Link className="btn btn-outline-info mr-3" to="/">Back to Main</Link>

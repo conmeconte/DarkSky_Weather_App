@@ -16,7 +16,11 @@
     overflow: hidden; 
 
 }
-
+@media (max-width: 768px) { 
+ .hero{
+   min-height: 80vh; 
+ }
+}
 
 html {
     font-size: 14px;
@@ -39,3 +43,4 @@ html {
       font-size: 28px;
     }
   }
+
