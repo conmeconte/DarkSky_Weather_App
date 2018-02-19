@@ -22,7 +22,7 @@ export default ()=>{
                             <Link className="dropdown-item" to="/search">Last Week</Link>
                         </div>
                     </div>
-                    <div className="mobile">
+                    <div className="mobile my-5">
                         <Link className="btn btn-outline-info mr-3" to="/search/date">By Date</Link>
                         <Link className="btn btn-outline-info mr-3" to="/search">Last Week</Link>
                     </div>
