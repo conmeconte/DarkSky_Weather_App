@@ -10,7 +10,6 @@ module.exports = (app, darksky)=>{
             longitude: req.body.lnglat.lng,
             time: req.body.date || moment().subtract(1, 'weeks'),
             language: 'en',
-            // exclude: ['minutely', 'daily'],
             exclude: ['minutely'],
             extendHourly: true
         })
