@@ -19,9 +19,8 @@ app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
 
-app.use(logError);
+
 app.use(errorHandler);
-app.use(clientErrorHandler);
 
 
 app.listen(PORT, ()=>{

@@ -2,7 +2,7 @@ var moment = require('moment');
 
 module.exports = (app, darksky)=>{
 
-    app.post('/api/weather', (req, res)=>{
+    app.post('/api/weather', (req, res, next)=>{
         console.log('api time', req.body.date); 
         darksky
         .options({
@@ -13,7 +13,11 @@ module.exports = (app, darksky)=>{
             exclude: ['minutely'],
             extendHourly: true
         })
-        .get()
+        .get((err)=>{
+            if(err){
+                next(err); 
+            }
+        })
         .then(value=>{
             res.send(value); 
         })
