@@ -7,6 +7,7 @@ import keys from '../keys';
 import axios from 'axios'; 
 import './search_bar.css'; 
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 
 
@@ -31,6 +32,7 @@ class SearchBar extends Component {
         let address2=''
         let lnglat= '';
         const sendingData={}
+        const promises =[]
         // var oneWeek = new Date();
         // oneWeek.setTime(oneWeek.valueOf() - 7 * 24 * 60 * 60 * 1000);
         // oneWeek.toLocaleString()
@@ -38,8 +40,6 @@ class SearchBar extends Component {
         for(let input in addresses){
             if(input === 'address'){
                 address2+=addresses[input]+','; 
-            }else if(input === 'date'){
-                sendingData[input]= addresses[input]; 
             }
             else{
                 address2+='+'+ addresses[input] + ','; 
@@ -49,11 +49,20 @@ class SearchBar extends Component {
         console.log('edited address', editAddress); 
         const URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${editAddress}&key=${keys.GEO_API_KEY}`
         
+
         this.props.reset(); 
-        axios.get(URL).then((data)=>{
-            lnglat= data.data.results[0].geometry.location;
-            sendingData["lnglat"]= lnglat
-            this.props.fetchWeather(sendingData); 
+
+
+        axios.get(URL).then(async(data)=>{
+            for(var i=7; i>=1; i--){
+                var pastWeekDay= moment().subtract(i, 'days')._d;
+                console.log('pastweek', pastWeekDay); 
+                sendingData['date']= pastWeekDay;
+                lnglat= data.data.results[0].geometry.location;
+                sendingData["lnglat"]= lnglat
+                const sendData= await this.props.fetchWeather(sendingData); 
+            }
+
         });
     }
 
