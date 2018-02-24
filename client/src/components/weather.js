@@ -73,6 +73,8 @@ class WeatherList extends Component{
                         size={defaults.size}
                         animate={defaults.animate}
                     />
+                    <br/>
+                    Time: {cityData.currently.time}
                 </td>
                 <td><Chart data={temps} color="orange" units='DegC' /></td>
                 <td><Chart data={pressure} color="blue" units="hPa" /></td>
