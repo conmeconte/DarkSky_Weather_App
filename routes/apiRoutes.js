@@ -15,7 +15,7 @@ module.exports = (app, darksky)=>{
         })
         .get((err)=>{
             if(err){
-                next(err); 
+                return next(err); 
             }
         })
         .then(value=>{
