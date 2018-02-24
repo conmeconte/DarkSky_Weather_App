@@ -21,7 +21,6 @@ class WeatherList extends Component{
         const defaults = {
             icon: 'CLEAR_DAY',
             color: 'white',
-            // size: 150,
             animate: true
           };
 
@@ -62,9 +61,7 @@ class WeatherList extends Component{
 
         return(
             <tr key={key}>
-                {/* <td><GoogleMap lon={longitude} lat={latitude} /></td> */}
                 <td><GoogleMap lon={this.props.weather.longitude} lat={this.props.weather.latitude} /></td>
-                {/* <td><GoogleMap  /></td> */}
                 <td>
                     {cityData.currently.summary}
                     <ReactAnimatedWeather
@@ -74,7 +71,7 @@ class WeatherList extends Component{
                         animate={defaults.animate}
                     />
                     <br/>
-                    Time: {cityData.currently.time}
+                    Date: {new Date(cityData.currently.time * 1000).toLocaleDateString()}
                 </td>
                 <td><Chart data={temps} color="orange" units='DegC' /></td>
                 <td><Chart data={pressure} color="blue" units="hPa" /></td>
