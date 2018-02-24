@@ -73,7 +73,9 @@ class WeatherList extends Component{
                         animate={defaults.animate}
                     />
                     <br/>
-                    Date: {new Date(cityData.daily.data[0].time * 1000).toLocaleDateString()}
+                    Date:
+                    <br/> 
+                    {new Date(cityData.daily.data[0].time * 1000).toLocaleDateString().replace(/\./g, '').replace(/\s/g,'/')}
                 </td>
                 <td><Chart data={temps} color="orange" units='DegC' /></td>
                 <td><Chart data={pressure} color="blue" units="hPa" /></td>
@@ -96,7 +98,6 @@ class WeatherList extends Component{
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {_.isEmpty(this.props.weather) ? null: this.renderWeather(this.props.weather) } */}
                     {_.isEmpty(this.props.weather) ? null: this.props.weather.map(this.renderWeather) }
                 </tbody>
 
