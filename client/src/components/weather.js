@@ -21,7 +21,6 @@ class WeatherList extends Component{
         const defaults = {
             icon: 'CLEAR_DAY',
             color: 'white',
-            // size: 150,
             animate: true
           };
 
@@ -62,9 +61,7 @@ class WeatherList extends Component{
 
         return(
             <tr key={key}>
-                {/* <td><GoogleMap lon={longitude} lat={latitude} /></td> */}
-                <td><GoogleMap lon={this.props.weather.longitude} lat={this.props.weather.latitude} /></td>
-                {/* <td><GoogleMap  /></td> */}
+                <td><GoogleMap lon={cityData.longitude} lat={cityData.latitude} /></td>
                 <td>
                     {cityData.currently.summary}
                     <ReactAnimatedWeather
@@ -73,6 +70,8 @@ class WeatherList extends Component{
                         size={defaults.size}
                         animate={defaults.animate}
                     />
+                    <br/>
+                    Date: {new Date(cityData.daily.data[0].time * 1000).toLocaleDateString()}
                 </td>
                 <td><Chart data={temps} color="orange" units='DegC' /></td>
                 <td><Chart data={pressure} color="blue" units="hPa" /></td>
@@ -96,7 +95,8 @@ class WeatherList extends Component{
                     </tr>
                 </thead>
                 <tbody>
-                    {_.isEmpty(this.props.weather) ? null: this.renderWeather(this.props.weather) }
+                    {/* {_.isEmpty(this.props.weather) ? null: this.renderWeather(this.props.weather) } */}
+                    {_.isEmpty(this.props.weather) ? null: this.props.weather.map(this.renderWeather) }
                 </tbody>
 
             </table>

@@ -4,7 +4,8 @@
   "description": "Simple Past Weather App",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect index.js",
+    "start": "node index.js",
+    "server": "nodemon --inspect index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run start\" \"npm run client\""
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/conmeconte/DarkSky_Weather_App#readme",
   "dependencies": {
+    "@google-cloud/storage": "^1.6.0",
     "dark-sky": "^1.1.2",
     "express": "^4.16.2",
     "file-system": "^2.2.2",

@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 export default props=>{
     function average(data){
-        return _.round(_.sum(data)/data.length)
+        return _.round(_.sum(data)/data.length,2);
     }
     return (
         <div>
