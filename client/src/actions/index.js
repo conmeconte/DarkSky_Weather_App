@@ -4,14 +4,18 @@ import keys from '../keys';
 import moment from 'moment';
 
 
+export const resetWeather = ()=> dispatch => {
+    dispatch({
+        type: types.RESET_WEATHER
+    })
+}
+
 export const fetchWeather = address => async dispatch => {
         const request= await axios.post('/api/weather', address);
         dispatch({
             type: types.FETCH_WEATHER,
             payload: request.data
-        })
-
-    
+        });
 }
 
 export function fetchWeatherByDate(address){
