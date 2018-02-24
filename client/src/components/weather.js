@@ -13,7 +13,6 @@ import _ from 'lodash';
 
 class WeatherList extends Component{
     renderWeather(cityData, key){
-        console.log('reached rednerweather', cityData); 
         const temps = cityData.hourly.data.map(weather=>weather.temperature);
         const pressure = cityData.hourly.data.map(weather => weather.pressure);
         const humidity = cityData.hourly.data.map(weather => weather.humidity);
@@ -25,35 +24,38 @@ class WeatherList extends Component{
           };
 
 
-            switch(cityData.currently.summary){
-                case "Partly Cloudy":
+            switch(cityData.currently.icon){
+                case "partly-cloudy-day":
                     defaults.icon= "PARTLY_CLOUDY_DAY"
                     break;
-                case "Mostly Cloudy":
+                case "partly-cloudy-night":
                     defaults.icon= "PARTLY_CLOUDY_DAY"
                     break;
-                case "Clear":
+                case "mostly-cloudy":
+                    defaults.icon= "PARTLY_CLOUDY_DAY"
+                    break;
+                case "clear":
                     defaults.icon= "CLEAR_DAY"
                     break;
-                case "Cloudy":
+                case "cloudy":
                     defaults.icon= "CLOUDY"
                     break;
-                case "Rain":
+                case "rain":
                     defaults.icon= "RAIN"
                     break;
-                case "Sleet":
+                case "sleet":
                     defaults.icon= "SLEET"
                     break;
-                case "Snow":
+                case "snow":
                     defaults.icon= "SNOW"
                     break;
-                case "Wind":
+                case "win":
                     defaults.icon= "WIND"
                     break;
-                case "Windy":
+                case "windy":
                     defaults.icon= "WIND"
                     break;
-                case "Fog":
+                case "fog":
                     defaults.icon= "FOG"
                     break;
                 default: null;
@@ -81,7 +83,6 @@ class WeatherList extends Component{
     }
 
     render(){
-        console.log("changed this.props.weather", this.props.weather)
 
         return(
             <table className="table table-hover table-responsive">
