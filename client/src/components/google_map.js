@@ -39,14 +39,4 @@ class GoogleMap extends Component{
 
 }
 
-// function mapStateToProps(state){
-//     console.log("mapstate", state); 
-//     return {
-//         lon: state.weather.weather.longitude,
-//         lat: state.weather.weather.latitude
-//     }
-
-// }
-
-// export default connect(mapStateToProps)(GoogleMap); 
 export default GoogleMap;
