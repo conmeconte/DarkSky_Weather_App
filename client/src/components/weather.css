@@ -25,11 +25,42 @@ canvas {
     float: left;
     margin-left: 8px;
     margin-top: 8px;
-  }
+}
+
+#whileLoadingTd{
+    height: 200px;
+    width: 200px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%); 
+}
+#loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+    -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
 
 @media (max-width: 768px) { 
     .table-hover{
         color: white !important; 
         display: block !important; 
+    }
+    #whileLoadingTd{
+        width: 80px;
+        height: 80px; 
     }
 }
