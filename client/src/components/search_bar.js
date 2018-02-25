@@ -5,7 +5,6 @@ import * as actions from '../actions';
 import { Field, reduxForm } from 'redux-form'; 
 import keys from '../keys';
 import axios from 'axios'; 
-import './search_bar.css'; 
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
@@ -32,8 +31,8 @@ class SearchBar extends Component {
         let address2=''
         let lnglat= '';
         const sendingData={}
-        const promises =[]
-
+        this.props.resetWeather();
+        document.body.style.cursor="progress"
 
         for(let input in addresses){
             if(input === 'address'){
@@ -70,9 +69,7 @@ class SearchBar extends Component {
     render(){
         return (
             <div className="form_container col-12">
-                <div className="video">
-                    <iframe src={/Mobi/.test(navigator.userAgent) ? null : "https://www.youtube.com/embed/iGpuQ0ioPrM?controls=0&showinfo=0&playlist=iGpuQ0ioPrM&autoplay=1&loop=1"} frameBorder="0"></iframe>   
-                </div>
+
                 <form onSubmit={this.props.handleSubmit(this.onFormSubmit.bind(this))}>
                     <h1 className="text-center pt-3">Last Week's Weather Information</h1>
                     <br/>
