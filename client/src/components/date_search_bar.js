@@ -37,7 +37,7 @@ class DateSearchBar extends Component {
             if(input === 'address'){
                 address2+=addresses[input]+','; 
             }else if(input === 'date'){
-                sendingData[input]= addresses[input]; 
+                sendingData[input]= new Date(addresses[input]).toUTCString(); 
             }
             else{
                 address2+='+'+ addresses[input] + ','; 

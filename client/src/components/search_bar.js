@@ -32,7 +32,6 @@ class SearchBar extends Component {
         let address2=''
         let lnglat= '';
         const sendingData={}
-        const promises =[]
 
 
         for(let input in addresses){

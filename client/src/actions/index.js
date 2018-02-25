@@ -32,7 +32,7 @@ export function fetchWeatherByDate(address){
         const request = axios.post('/api/weather', address).then((resp)=>{
 
             dispatch({
-                type: types.FETCH_WEATHER,
+                type: types.FETCH_WEATHER_BY_DATE,
                 payload: resp.data
             });
 
