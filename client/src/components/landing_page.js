@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
-import './landing_page.css';
 
 export default ()=>{
     return(
         <div className="landing justify-content-center">
-            <div className="video">
-                <iframe src={/Mobi/.test(navigator.userAgent) ? null : "https://www.youtube.com/embed/iGpuQ0ioPrM?controls=0&showinfo=0&playlist=iGpuQ0ioPrM&autoplay=1&loop=1"} frameBorder="0"></iframe>   
-            </div>
+
             <div className="landing_content">
                 <div className="row justify-content-center">
                     <h1 className="text-center px-5">WELCOME TO YOUR WEATHER SEARCH ENGINE</h1>

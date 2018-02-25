@@ -2,7 +2,6 @@ var moment = require('moment');
 
 module.exports = (app, darksky)=>{
     app.post('/api/weather', (req, res, next)=>{
-        console.log('backend', req.body)
         darksky
         .options({
             latitude: req.body.lnglat.lat,

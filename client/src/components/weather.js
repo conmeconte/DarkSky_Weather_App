@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Chart from './chart';
 import GoogleMap from './google_map';
-import './weather.css'; 
 import Skycons from 'react-skycons';
 import ReactAnimatedWeather from 'react-animated-weather';
 import _ from 'lodash';
@@ -13,7 +12,6 @@ import _ from 'lodash';
 
 class WeatherList extends Component{
     renderWeather(cityData, key){
-        console.log("city data", cityData); 
         const temps = cityData.hourly.data.map(weather=>weather.temperature);
         const pressure = cityData.hourly.data.map(weather => weather.pressure);
         const humidity = cityData.hourly.data.map(weather => weather.humidity);
@@ -85,7 +83,6 @@ class WeatherList extends Component{
     }
 
     render(){
-        console.log('did it reach', this.props.weather, this.props.weatherByDate)
         return(
             <table className="table table-hover table-responsive">
                 <thead>
@@ -99,7 +96,7 @@ class WeatherList extends Component{
                 </thead>
                 <tbody>
                     {_.isEmpty(this.props.weatherByDate) ? null: this.renderWeather(this.props.weatherByDate) }
-                    {_.isEmpty(this.props.weather) ? null : (this.props.weather.length >= 7) ? this.props.weather.map(this.renderWeather) : document.body.style.cursor="progress"}
+                    {_.isEmpty(this.props.weather) ? null : (this.props.weather.length >= 7) ? this.props.weather.map(this.renderWeather) : null}
                 </tbody>
 
             </table>
