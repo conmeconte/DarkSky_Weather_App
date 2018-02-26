@@ -7,7 +7,7 @@ import styles from '../assets/mapStyles';
 
 class GoogleMap extends Component{
     componentDidMount(){
-        console.log('did mount', this.props)
+
         new google.maps.Map(this.refs.map, {
             zoom: 8,
             disableDefaultUI: true,
@@ -20,7 +20,6 @@ class GoogleMap extends Component{
         })
     }
     componentWillReceiveProps(nextProps){
-        console.log('will recieve', this.props)
         new google.maps.Map(this.refs.map, {
             zoom: 8,
             disableDefaultUI: true,
@@ -33,7 +32,6 @@ class GoogleMap extends Component{
     }
     
     render(){
-            // this.refs.map 
         return <div ref='map' /> 
     }
 

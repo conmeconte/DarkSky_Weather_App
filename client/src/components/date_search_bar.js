@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators } from 'redux';
-import { fetchWeatherByDate } from '../actions';
+import * as actions from '../actions';
 import { Field, reduxForm } from 'redux-form'; 
 import keys from '../keys';
 import axios from 'axios'; 
-import './search_bar.css'; 
 import { Link } from 'react-router-dom';
 
 
@@ -30,13 +29,14 @@ class DateSearchBar extends Component {
         let address2=''
         let lnglat= '';
         const sendingData={}
+        this.props.resetWeather()
 
 
         for(let input in addresses){
             if(input === 'address'){
                 address2+=addresses[input]+','; 
             }else if(input === 'date'){
-                sendingData[input]= addresses[input]; 
+                sendingData[input]= new Date(addresses[input]).toUTCString(); 
             }
             else{
                 address2+='+'+ addresses[input] + ','; 
@@ -54,12 +54,15 @@ class DateSearchBar extends Component {
         });
     }
 
+    handleRefreshClick(){
+        this.props.reset(); 
+        this.props.resetWeather()
+    }
+
     render(){
         return (
             <div className="form_container col-12">
-                <div className="video">
-                    <iframe src={/Mobi/.test(navigator.userAgent) ? null : "https://www.youtube.com/embed/iGpuQ0ioPrM?controls=0&showinfo=0&playlist=iGpuQ0ioPrM&autoplay=1&loop=1"} frameBorder="0"></iframe>   
-                </div>
+
                 <form onSubmit={this.props.handleSubmit(this.onFormSubmit.bind(this))}>
                     <h1 className="text-center pt-3">Choose the Location and Date</h1>
                     <br/>
@@ -71,8 +74,8 @@ class DateSearchBar extends Component {
                             <Field id="dateSelector" type="date" name="date" component={this.renderField} label="Select Date"/>
                             <div className="row justify-content-end my-2">
                                 <button className="btn btn-outline-success mr-3" type="submit">Search</button>
-                                <button onClick={this.props.reset} type="button" className = "mr-3 btn btn-outline-danger">Refresh</button>
-                                <Link className="btn btn-outline-info mr-3" to="/">Back to Main</Link>
+                                <button onClick={this.handleRefreshClick.bind(this)} type="button" className = "mr-3 btn btn-outline-danger">Refresh</button>
+                                <Link onClick={this.handleRefreshClick.bind(this)} className="btn btn-outline-info mr-3" to="/">Back to Main</Link>
                             </div>
                         </div>
                     </div>
@@ -104,4 +107,4 @@ DateSearchBar=reduxForm({
     validate,
     form: 'Search Weather by Date'
 })(DateSearchBar);
-export default connect(null, {fetchWeatherByDate})(DateSearchBar);
+export default connect(null, actions)(DateSearchBar);

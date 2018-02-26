@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators } from 'redux';
-import { fetchWeather } from '../actions';
+import * as actions from '../actions';
 import { Field, reduxForm } from 'redux-form'; 
 import keys from '../keys';
 import axios from 'axios'; 
-import './search_bar.css'; 
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 
 
@@ -31,15 +31,12 @@ class SearchBar extends Component {
         let address2=''
         let lnglat= '';
         const sendingData={}
-        // var oneWeek = new Date();
-        // oneWeek.setTime(oneWeek.valueOf() - 7 * 24 * 60 * 60 * 1000);
-        // oneWeek.toLocaleString()
+        this.props.resetWeather();
+        document.body.style.cursor="progress"
 
         for(let input in addresses){
             if(input === 'address'){
                 address2+=addresses[input]+','; 
-            }else if(input === 'date'){
-                sendingData[input]= addresses[input]; 
             }
             else{
                 address2+='+'+ addresses[input] + ','; 
@@ -49,20 +46,30 @@ class SearchBar extends Component {
         console.log('edited address', editAddress); 
         const URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${editAddress}&key=${keys.GEO_API_KEY}`
         
+
         this.props.reset(); 
-        axios.get(URL).then((data)=>{
-            lnglat= data.data.results[0].geometry.location;
-            sendingData["lnglat"]= lnglat
-            this.props.fetchWeather(sendingData); 
+
+        axios.get(URL).then(async(data)=>{
+            for(var i=7; i>=1; i--){
+                var pastWeekDay= moment().subtract(i, 'days')._d;
+                sendingData['date']= pastWeekDay;
+                lnglat= data.data.results[0].geometry.location;
+                sendingData["lnglat"]= lnglat
+                const sendData= await this.props.fetchWeather(sendingData); 
+            }
+
         });
+    }
+
+    handleRefreshClick(){
+        this.props.reset(); 
+        this.props.resetWeather()
     }
 
     render(){
         return (
             <div className="form_container col-12">
-                <div className="video">
-                    <iframe src={/Mobi/.test(navigator.userAgent) ? null : "https://www.youtube.com/embed/iGpuQ0ioPrM?controls=0&showinfo=0&playlist=iGpuQ0ioPrM&autoplay=1&loop=1"} frameBorder="0"></iframe>   
-                </div>
+
                 <form onSubmit={this.props.handleSubmit(this.onFormSubmit.bind(this))}>
                     <h1 className="text-center pt-3">Last Week's Weather Information</h1>
                     <br/>
@@ -71,11 +78,10 @@ class SearchBar extends Component {
                             <Field name="address" component={this.renderField} label="Street Address" />
                             <Field name="city" component={this.renderField} label="City"/>
                             <Field name="state" component={this.renderField} label="State"/>
-                            {/* <Field id="dateSelector" type="date" name="date" component={this.renderField} label="Select Date"/> */}
                             <div className="row justify-content-end">
                                 <button className="btn btn-outline-success mr-3" type="submit">Search</button>
-                                <button onClick={this.props.reset} type="button" className = "btn btn-outline-danger mr-3">Refresh</button>
-                                <Link className="btn btn-outline-info mr-3" to="/">Back to Main</Link>
+                                <button onClick={this.handleRefreshClick.bind(this)} type="button" className = "btn btn-outline-danger mr-3">Refresh</button>
+                                <Link onClick={this.handleRefreshClick.bind(this)} className="btn btn-outline-info mr-3" to="/">Back to Main</Link>
                             </div>
                         </div>
                     </div>
@@ -87,19 +93,13 @@ class SearchBar extends Component {
 }
 function validate(values){
     const errors={};
-    // if (!values.address){
-    //     errors.address= "Please enter the address"; 
-    // }
+
     if (!values.city){
         errors.city= "Please enter the City"; 
     }
     if (!values.state){
         errors.state= "Please enter the State"; 
     }
-    // if (!values.date){
-    //     errors.date= "Please enter a valid Date"; 
-    // }
-
     return errors; 
 }
 
@@ -113,7 +113,7 @@ SearchBar=reduxForm({
     validate,
     form: 'Search Weather'
 })(SearchBar);
-export default connect(null, {fetchWeather})(SearchBar);
+export default connect(null, actions)(SearchBar);
 
 
 // export default reduxForm({
