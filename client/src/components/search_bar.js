@@ -67,7 +67,7 @@ class SearchBar extends Component {
                 sendingData['date']= pastWeekDay;
                 lnglat= data.data.results[0].geometry.location;
                 sendingData["lnglat"]= lnglat
-                const sendData= await this.props.fetchWeather(sendingData); 
+                await this.props.fetchWeather(sendingData); 
             }
 
         });
