@@ -48,14 +48,16 @@ class SearchBar extends Component {
         
 
         this.props.reset(); 
-
-        // axios.get(URL).then((data)=>{
+        //Faster but inconsistent date order
+        // axios.get(URL).then(async (data)=>{
         //     for(let i=7; i>=1; i--){
-        //         let pastWeekDay= moment().subtract(i, 'days')._d;
-        //         sendingData['date']= pastWeekDay;
-        //         lnglat= data.data.results[0].geometry.location;
-        //         sendingData["lnglat"]= lnglat
-        //         this.props.fetchWeather(sendingData); 
+        //         // (()=>{
+        //             let pastWeekDay= await moment().subtract(i, 'days')._d;
+        //             sendingData['date']= pastWeekDay;
+        //             lnglat= data.data.results[0].geometry.location;
+        //             sendingData["lnglat"]= lnglat
+        //             this.props.fetchWeather(sendingData); 
+        //         // })(); 
         //     }
 
         // });
