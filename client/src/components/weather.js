@@ -96,7 +96,13 @@ class WeatherList extends Component{
                 </thead>
                 <tbody>
                     {_.isEmpty(this.props.weatherByDate) ? null: this.renderWeather(this.props.weatherByDate) }
-                    {_.isEmpty(this.props.weather) ? null : (this.props.weather.length >= 7) ? this.props.weather.map(this.renderWeather) : null}
+                    {_.isEmpty(this.props.weather) ? 
+                        null : (this.props.weather.length >= 7) ?
+                         this.props.weather.map(this.renderWeather) :
+                          <td id='whileLoadingTd'>
+                              <div id='loader'></div>
+                          </td>
+                    }
                 </tbody>
 
             </table>
