@@ -22,9 +22,7 @@ module.exports = (app, darksky)=>{
         .catch(err=>{
             res.send(err); 
         })
-        
-
     
 
-
+    })
 }
