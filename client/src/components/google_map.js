@@ -19,17 +19,20 @@ class GoogleMap extends Component{
 
         })
     }
-    componentWillReceiveProps(nextProps){
-        new google.maps.Map(this.refs.map, {
-            zoom: 8,
-            disableDefaultUI: true,
-            center: {
-                lat: nextProps.lat,
-                lng: nextProps.lon
-            },
-            styles
-        })
-    }
+    // componentWillReceiveProps(nextProps){
+    //     if(this.props != nextProps){
+    //         new google.maps.Map(this.refs.map, {
+    //             zoom: 8,
+    //             disableDefaultUI: true,
+    //             center: {
+    //                 lat: nextProps.lat,
+    //                 lng: nextProps.lon
+    //             },
+    //             styles
+    //         })
+    //     }
+
+    // }
     
     render(){
         return <div ref='map' /> 
