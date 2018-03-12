@@ -8,6 +8,7 @@ export default function(state= DEFAULT_STATE, action){
 
     switch (action.type){
         case types.FETCH_WEATHER:
+            console.log('reducer state', state)
             return [action.payload, ...state]; 
         case types.RESET_WEATHER:
             return DEFAULT_STATE; 

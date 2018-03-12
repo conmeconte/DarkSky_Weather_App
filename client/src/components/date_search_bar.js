@@ -10,6 +10,11 @@ import { Link } from 'react-router-dom';
 
 
 class DateSearchBar extends Component {
+    constructor(props){
+        super(props);
+
+        this.onFormSubmit= this.onFormSubmit.bind(this); 
+    }
 
     renderField(field){
         const { meta: { touched , error } } = field; 
@@ -63,7 +68,7 @@ class DateSearchBar extends Component {
         return (
             <div className="form_container col-12">
 
-                <form onSubmit={this.props.handleSubmit(this.onFormSubmit.bind(this))}>
+                <form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
                     <h1 className="text-center pt-3">Choose the Location and Date</h1>
                     <br/>
                     <div className="row justify-content-center">
@@ -107,4 +112,5 @@ DateSearchBar=reduxForm({
     validate,
     form: 'Search Weather by Date'
 })(DateSearchBar);
+
 export default connect(null, actions)(DateSearchBar);

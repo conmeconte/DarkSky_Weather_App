@@ -11,19 +11,33 @@ export const resetWeather = ()=> dispatch => {
 }
 
 export const fetchWeather = address => async dispatch => {
-        const request= await axios.post('/api/weather', address);
-        if(!request){
-            dispatch({
-                type: types.AXIOS_ERROR,
-                msg: " Failed axios call ",
-                payload: err
-            });
-        } else{
-            dispatch({
-                type: types.FETCH_WEATHER,
-                payload: request.data
-            });
+        console.log('actions date', address.date); 
+        var promises= []; 
+        for(let i=7; i>0; i--){
+            address.date= moment().subtract(i, 'days')._d;
+            await promises.push(axios.post('/api/weather', address))
+            console.log('why', address.date)
         }
+        console.log('promises', promises); 
+        axios.all(promises).then(results=>{
+            results.forEach((request)=>{
+                if(!request){
+                    dispatch({
+                        type: types.AXIOS_ERROR,
+                        msg: " Failed axios call ",
+                        payload: err
+                    });
+                } else{
+                    dispatch({
+                        type: types.FETCH_WEATHER,
+                        payload: request.data
+                    });
+                }
+            })
+        })
+
+
+
 
 }
 
