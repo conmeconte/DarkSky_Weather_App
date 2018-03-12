@@ -9,6 +9,7 @@ export default function(state= DEFAULT_STATE, action){
         case types.FETCH_WEATHER_BY_DATE:
             return action.payload; 
         case types.RESET_WEATHER:
+            console.log('search_by_weather_del state ', state); 
             return DEFAULT_STATE; 
         case types.AXIOS_ERROR:
             console.log("reducer error ", action.payload); 

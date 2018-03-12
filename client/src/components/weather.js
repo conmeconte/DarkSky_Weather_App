@@ -99,9 +99,11 @@ class WeatherList extends Component{
                     {_.isEmpty(this.props.weather) ? 
                         null : (this.props.weather.length >= 7) ?
                          this.props.weather.map(this.renderWeather) :
-                          <td id='whileLoadingTd'>
-                              <div id='loader'></div>
-                          </td>
+                          <tr>
+                            <td id='whileLoadingTd'>
+                                <div id='loader'></div>
+                            </td>
+                          </tr>
                     }
                 </tbody>
 

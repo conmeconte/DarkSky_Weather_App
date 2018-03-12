@@ -71,6 +71,8 @@ class SearchBar extends Component {
             }
 
         });
+
+
     }
 
     handleRefreshClick(){
