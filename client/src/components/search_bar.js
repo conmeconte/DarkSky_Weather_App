@@ -28,6 +28,9 @@ class SearchBar extends Component {
  
 
     onFormSubmit(addresses){
+        console.log('lang', navigator.language);
+
+
         let address2=''
         let lnglat= '';
         const sendingData={}
@@ -52,6 +55,7 @@ class SearchBar extends Component {
         axios.get(URL).then((data)=>{
                 lnglat= data.data.results[0].geometry.location;
                 sendingData["lnglat"]= lnglat
+                sendingData["lang"] = navigator.language;
                 this.props.fetchWeather(sendingData); 
 
         });
