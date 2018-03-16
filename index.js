@@ -4,6 +4,7 @@ const path          = require('path');
 const DarkSky = require('dark-sky')
 const darksky = new DarkSky(keys.API_KEY); 
 const { logError, errorHandler, clientErrorHandler } = require('./middlewares/handleError'); 
+// const location = require('browser-location')
 
 const app   = express();
 const PORT  = process.env.PORT || 8000;
@@ -19,6 +20,10 @@ app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
 
+// location.get(function (err, position) {
+//     console.log('location err', err);
+//     console.log('location ', position); 
+//   })
 
 
 

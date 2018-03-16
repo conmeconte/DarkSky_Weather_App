@@ -3,8 +3,9 @@ import SearchBar from './search_bar';
 import DateSearchBar from './date_search_bar'; 
 import Weather from './weather';
 import Landing from './landing_page';
+import NotFound from './NotFound';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 require('jquery/dist/jquery');
@@ -34,7 +35,8 @@ class App extends Component{
                         <Route exact path='/' component={Landing}/>
                         <Route exact path='/search' component={SearchBar} />
                         <Route path='/search/date' component={DateSearchBar} />
-                        <Route path='/*' component={Landing}/>
+                        <Route path='/404' component={NotFound}/>
+                        <Redirect from='*' to='/404' />
                     </Switch>
                 </div>
                 <br/>

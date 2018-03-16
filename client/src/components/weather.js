@@ -75,8 +75,8 @@ class WeatherList extends Component{
                     <br/> 
                     {new Date(cityData.daily.data[0].time * 1000).toLocaleDateString().replace(/\./g, '').replace(/\s/g,'/')}
                 </td>
-                <td><Chart data={temps} color="orange" units='DegC' /></td>
-                <td><Chart data={pressure} color="blue" units="hPa" /></td>
+                <td><Chart data={temps} color="orange" units={navigator.language==="en-US"? "F˚": 'DegC'} /></td>
+                <td><Chart data={pressure} color="blue" units={navigator.language==="en-US"? "mb": "hPa" }/></td>
                 <td><Chart data={humidity} color="yellow" units="(0-1)"/></td>
             </tr>
         )
@@ -89,8 +89,8 @@ class WeatherList extends Component{
                     <tr>
                         <th>City</th>
                         <th>Weather</th>
-                        <th>Temperature (DegC)</th>
-                        <th>Pressure (hPa)</th>
+                        <th>Temperature {navigator.language==="en-US"?"F˚": 'DegC'}</th>
+                        <th>Pressure {navigator.language==="en-US"? "mb": "hPa" }</th>
                         <th>Humidity (0-1)</th>
                     </tr>
                 </thead>

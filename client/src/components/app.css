@@ -17,6 +17,12 @@
     overflow: hidden; 
 
 }
+.notFound{
+  height: 100vh; 
+  width: 100vw; 
+  background-color: white;
+  z-index: 100; 
+}
 @media (max-width: 768px) { 
  .hero{
    min-height: 80vh; 
